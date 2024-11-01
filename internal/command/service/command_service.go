@@ -24,6 +24,9 @@ func (s CommandService) CreateTweet(tweet *model.Tweet) error {
 
 // FollowUser implements CommandServiceInterface.
 func (s CommandService) FollowUser(followerID string, followeeID string) error {
+	//todo: validar que los IDs no corresponde a un usuario existente
+	//todo: validar que el usuaurio no se siga a si mismo
+	//todo: validar que el usuario no siga a alguien que ya sigue
 	return s.repo.FollowUser(followerID, followeeID)
 
 }
