@@ -1,30 +1,29 @@
-# Usa una imagen base de Go
-FROM golang:1.20 as builder
+# Usar una imagen base de Go para compilar
+FROM golang:1.20 AS builder
 
-# Establece el directorio de trabajo
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos del módulo y descarga las dependencias
-COPY go.mod go.sum ./
+# Copiar los archivos de módulo desde la raíz
+COPY ../go.mod ./
+COPY ../go.sum ./
 RUN go mod download
 
-# Copia el código fuente
+# Copiar el resto del código fuente
 COPY . .
 
-# Compila la aplicación
-RUN CGO_ENABLED=0 GOOS=linux go build -o query_service ./cmd/query_service
+# Compilar el servicio
+RUN go build -o query-service .
 
-# Usa una imagen base de Alpine para el contenedor final
+# Usar una imagen base de Alpine para el runtime
 FROM alpine:latest
 
-# Copia el binario compilado desde la etapa de construcción
-COPY --from=builder /app/query_service .
+# Copiar el binario compilado
+WORKDIR /app
+COPY --from=builder /app/query-service .
 
-# Define la variable de entorno para la conexión a MongoDB
-ENV MONGO_URI="mongodb://mongo:27017/microblog"
-
-# Expone el puerto en el que la aplicación escuchará
+# Exponer el puerto
 EXPOSE 8082
 
-# Comando para ejecutar la aplicación
-CMD ["./query_service"]
+# Comando por defecto
+CMD ["./query-service"]
