@@ -1,5 +1,4 @@
 FROM golang:latest AS builder
-RUN apt-get update
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \

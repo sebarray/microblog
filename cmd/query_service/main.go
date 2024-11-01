@@ -8,6 +8,7 @@ import (
 	"context"
 	"microblog/internal/query/handler"
 	"microblog/internal/query/repository"
+	"microblog/internal/query/service"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -22,9 +23,10 @@ func main() {
 	defer client.Disconnect(context.Background())
 
 	db := client.Database("microblog")
-	//repo := repository.NewQueryRepository(db)
+
 	repo := repository.NewQueryRepository(db)
-	queryHandler := handler.NewQueryHandler(*repo)
+	Service := service.NewCommandService(repo)
+	queryHandler := handler.NewQueryHandler(*Service)
 
 	http.HandleFunc("/timeline", queryHandler.GetTimeline)
 

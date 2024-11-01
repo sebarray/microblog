@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: query-service
-        image: microblog-query-service:latest
+        image: sebarray/microblog-query-service
         ports:
         - containerPort: 8082
         env:
