@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"log"
 	"microblog/internal/command/model"
 	"microblog/internal/command/repository"
 	"net/http"
@@ -18,10 +19,12 @@ func NewCommandHandler(repo repository.CommandRepository) *CommandHandler {
 func (h *CommandHandler) PostTweet(w http.ResponseWriter, r *http.Request) {
 	var tweet model.Tweet
 	if err := json.NewDecoder(r.Body).Decode(&tweet); err != nil {
+		log.Printf("Error decoding tweet: %v", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	if err := h.repo.SaveTweet(&tweet); err != nil {
+		log.Printf("Error saving tweet: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

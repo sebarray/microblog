@@ -27,6 +27,6 @@ func main() {
 
 	http.HandleFunc("/tweet", commandHandler.PostTweet)
 	http.HandleFunc("/follow", commandHandler.FollowUser)
-
+	log.Println("Command service running on port 8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }

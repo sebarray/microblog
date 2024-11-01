@@ -28,5 +28,6 @@ func main() {
 
 	http.HandleFunc("/timeline", queryHandler.GetTimeline)
 
+	log.Println("Query service running on port 8081")
 	log.Fatal(http.ListenAndServe(":8082", nil))
 }

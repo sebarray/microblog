@@ -1,29 +1,15 @@
-# Usar una imagen base de Go para compilar
-FROM golang:1.20 AS builder
-
-# Establecer el directorio de trabajo
-WORKDIR /app
-
-# Copiar los archivos de módulo desde la raíz
-COPY ../go.mod ./
-COPY ../go.sum ./
+FROM golang:latest AS builder
+RUN apt-get update
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64
+WORKDIR /go/src
+COPY go.mod .
 RUN go mod download
-
-# Copiar el resto del código fuente
 COPY . .
+RUN go build ./cmd/command_service/main.go
 
-# Compilar el servicio
-RUN go build -o command-service .
-
-# Usar una imagen base de Alpine para el runtime
-FROM alpine:latest
-
-# Copiar el binario compilado
-WORKDIR /app
-COPY --from=builder /app/command-service .
-
-# Exponer el puerto
-EXPOSE 8081
-
-# Comando por defecto
-CMD ["./command-service"]
+FROM alpine
+COPY --from=builder /go/src .
+ENTRYPOINT  ["./main"]
