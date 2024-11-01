@@ -16,5 +16,7 @@ func NewCommandService(repo *repository.QueryRepository) *CommandService {
 
 // GetFollowedTweets implements QueryServiceInterface.
 func (s CommandService) GetFollowedTweets(userID string) ([]model.Tweet, error) {
+
+	//todo: verificar que el usuario exista
 	return s.repo.GetFollowedTweets(userID)
 }

@@ -64,3 +64,9 @@ Gracias a Kubernetes, la aplicación soporta la replicación y balanceo de carga
 - **Creación de Publicaciones**: Los usuarios pueden crear publicaciones a través del Command Service, que luego se almacenan en MongoDB.
 - **Timeline del Usuario**: Cuando un usuario solicita su timeline, el Query Service accede a MongoDB para compilar una lista de publicaciones relevantes.
 - **Seguir/Dejar de Seguir Usuarios**: Se gestionan a través del Command Service, actualizando la lista de seguidores en la base de datos para determinar qué publicaciones mostrar en el timeline del usuario.
+
+
+
+
+## 6 documentacion funcion 
+ https://documenter.getpostman.com/view/16703239/2sAY4xA21S
