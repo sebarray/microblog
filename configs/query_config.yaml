@@ -1,0 +1,2 @@
+# Configuración para el servicio de consulta
+mongo_uri: "mongodb://mongo:27017/microblog"
