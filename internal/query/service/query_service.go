@@ -1,20 +1,5 @@
-package repository
+package service
 
-import (
-	"context"
-	"microblog/internal/query/model"
-
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-)
-
-type QueryRepository struct {
-	db *mongo.Database
-}
-
-func NewQueryRepository(db *mongo.Database) *QueryRepository {
-	return &QueryRepository{db: db}
-}
 
 func (r *CommandRepository) GetFollowedTweets(userID string) ([]model.Tweet, error) {
 	// Paso 1: Obtener IDs de los usuarios seguidos por el userID
