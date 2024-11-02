@@ -1,7 +1,7 @@
-package repository
+package service
 
 import "microblog/internal/query/model"
 
-type QueryRepositoryInterface interface {
+type QueryServiceInterface interface {
 	GetFollowedTweets(userID string) ([]model.Tweet, error)
 }

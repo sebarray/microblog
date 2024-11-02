@@ -1,8 +1,8 @@
-package repository
+package service
 
 import "microblog/internal/command/model"
 
-type CommandRepositoryInterface interface {
+type CommandServiceInterface interface {
 	CreateTweet(tweet *model.Tweet) error
 	FollowUser(followerID, followeeID string) error
 }
