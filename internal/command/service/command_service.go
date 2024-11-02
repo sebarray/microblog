@@ -7,10 +7,10 @@ import (
 )
 
 type CommandService struct {
-	repo repository.CommandRepository
+	repo repository.CommandRepositoryInterface
 }
 
-func NewCommandService(repo repository.CommandRepository) *CommandService {
+func NewCommandService(repo repository.CommandRepositoryInterface) *CommandService {
 	return &CommandService{repo: repo}
 }
 

@@ -24,7 +24,7 @@ func main() {
 
 	db := client.Database("microblog")
 	repo := repository.NewCommandRepository(db)
-	service := service.NewCommandService(*repo)
+	service := service.NewCommandService(repo)
 	commandHandler := handler.NewCommandHandler(*service)
 
 	http.HandleFunc("/tweet", commandHandler.PostTweet)

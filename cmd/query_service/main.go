@@ -25,7 +25,7 @@ func main() {
 	db := client.Database("microblog")
 
 	repo := repository.NewQueryRepository(db)
-	Service := service.NewCommandService(repo)
+	Service := service.NewQueryService(repo)
 	queryHandler := handler.NewQueryHandler(*Service)
 
 	http.HandleFunc("/timeline", queryHandler.GetTimeline)
